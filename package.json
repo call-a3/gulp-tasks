@@ -1,0 +1,25 @@
+{
+  "name": "gulp-tasks",
+  "version": "0.0.0",
+  "description": "Gulp plugin that wraps gulp and loads tasks as seperate files from a gulp folder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'No tests' && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/call-a3/gulp-tasks.git"
+  },
+  "keywords": [
+    "gulp",
+    "gulp-plugin"
+  ],
+  "author": "Adriaan Callaerts <adriaan.callaerts@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/call-a3/gulp-tasks/issues"
+  },
+  "homepage": "https://github.com/call-a3/gulp-tasks",
+  "dependencies": {
+  }
+}
