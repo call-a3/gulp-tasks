@@ -1,0 +1,6 @@
+{
+  "name": "gulp-tasks-test",
+  "version": "0.0.0",
+  "description": "Gulp plugin that wraps gulp and loads tasks as seperate files from a gulp folder",
+  "main": "index.js"
+}

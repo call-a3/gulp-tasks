@@ -4,7 +4,7 @@
   "description": "Gulp plugin that wraps gulp and loads tasks as seperate files from a gulp folder",
   "main": "index.js",
   "scripts": {
-    "test": "echo 'No tests' && exit 1"
+    "test": "node ./test/spec.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,16 @@
   },
   "homepage": "https://github.com/call-a3/gulp-tasks",
   "dependencies": {
+    "coffee-script": "^1.8.0",
+    "gulp": "^3.8.10",
+    "gulp-clean": "^0.3.1",
+    "gulp-plumber": "^0.6.6",
+    "gulp-util": "^3.0.1",
+    "minimist": "^1.1.0"
+  },
+  "devDependencies": {
+    "extend": "^2.0.0",
+    "tap-spec": "^1.0.1",
+    "tape": "^3.0.3"
   }
 }
