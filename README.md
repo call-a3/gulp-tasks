@@ -1,14 +1,14 @@
-gulp-tasks
-==========
+gulp-loader
+===========
 
-[![Build Status](https://travis-ci.org/call-a3/gulp-tasks.svg?branch=develop)](https://travis-ci.org/call-a3/gulp-tasks)
-[![Dependency Status](https://david-dm.org/call-a3/gulp-tasks.svg)](https://david-dm.org/call-a3/gulp-tasks) [![devDependency Status](https://david-dm.org/call-a3/gulp-tasks/dev-status.svg)](https://david-dm.org/call-a3/gulp-tasks#info=devDependencies)
+[![Build Status](https://travis-ci.org/call-a3/gulp-loader.svg?branch=master)](https://travis-ci.org/call-a3/gulp-loader)
+[![Dependency Status](https://david-dm.org/call-a3/gulp-loader.svg)](https://david-dm.org/call-a3/gulp-loader) [![devDependency Status](https://david-dm.org/call-a3/gulp-loader/dev-status.svg)](https://david-dm.org/call-a3/gulp-loader#info=devDependencies)
 
-Gulp plugin that allows the use of browserify transforms in a gulp pipeline.
+Gulp plugin that wraps gulp and loads tasks from a specified folder. Task definitions are compatible with [gulp-task-loader](https://www.npmjs.org/package/gulp-task-loader).
 
 ## Installation
 
-[![gulp-tasks](https://nodei.co/npm/gulp-tasks.png?mini=true)](https://nodei.co/npm/gulp-tasks)
+[![gulp-loader](https://nodei.co/npm/gulp-loader.png?mini=true)](https://nodei.co/npm/gulp-loader)
 
 ## Usage
 Just write this in your gulpfile.js
@@ -17,7 +17,7 @@ Just write this in your gulpfile.js
   instead of require('gulp') and then defining tasks on it
   just write the following 
 */
-require('gulp-tasks')();
+require('gulp-loader')();
 ```
 
 Now create a folder next to your gulpfile.js called `gulp` and have them contain tasks like this:
@@ -41,7 +41,7 @@ You can also write tasks in coffeescript.
 **WARNING**: tasks are included inside the scope of the gulpfile. Therefore, when require-ing from relative paths within tasks, assume the current directory is the one in which the gulpfile is found.
 
 ## Extra features
-Gulp-tasks wraps the gulp library in a backwards-compatible way and exposes it to the tasks. 
+gulp-loader wraps the gulp library in a backwards-compatible way and exposes it to the tasks. 
 This means you can define your tasks as if gulp was pre-loaded, but you can also use some shortcuts or extra features.
 
 ### gulp.util
@@ -52,4 +52,4 @@ gutil.log(); // or whatever gulp-util function you would use
 ```
 
 ## License
-[MIT](http://github.com/call-a3/gulp-tasks/blob/master/LICENSE)
+[MIT](http://github.com/call-a3/gulp-loader/blob/master/LICENSE)
