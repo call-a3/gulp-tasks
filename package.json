@@ -1,10 +1,10 @@
 {
   "name": "gulp-loader",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Gulp plugin that wraps gulp and loads tasks as seperate files from a gulp folder",
   "main": "index.js",
   "scripts": {
-    "test": "node ./test/spec.js | tap-spec"
+    "test": "cd ./test && npm install && cd .. && node ./test/spec.js | tap-spec"
   },
   "repository": {
     "type": "git",
