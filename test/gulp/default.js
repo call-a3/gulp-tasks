@@ -1,6 +1,5 @@
 // TASK default
 
-var gulp = require('gulp');
 var rename = require('./lib/rename');
 
 module.exports = function() {
