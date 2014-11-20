@@ -1,6 +1,6 @@
 {
   "name": "gulp-tasks",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Gulp plugin that wraps gulp and loads tasks as seperate files from a gulp folder",
   "main": "index.js",
   "scripts": {
