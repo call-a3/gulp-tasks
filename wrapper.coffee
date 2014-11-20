@@ -17,8 +17,8 @@ wrapper = extend {}, gulp, {
   src: (params...) ->
     if params.length is 0 or typeof params[0] isnt 'string'
       params.unshift @dirs.source + '/*'
-    gulp.src params...
-      .pipe plumber()
+    gulp.src(params...)
+      .pipe(plumber())
   dest: (params...) ->
     if params.length is 0 or typeof params[0] isnt 'string'
       if @debug
