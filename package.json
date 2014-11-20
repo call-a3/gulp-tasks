@@ -22,7 +22,6 @@
   "homepage": "https://github.com/call-a3/gulp-tasks",
   "dependencies": {
     "coffee-script-redux": "^2.0.0-beta8",
-    "contextify": "^0.1.9",
     "gulp": "^3.8.10",
     "gulp-clean": "^0.3.1",
     "gulp-plumber": "^0.6.6",
