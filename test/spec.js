@@ -46,16 +46,12 @@ test('functionality test', function (t) {
 
     exec('gulp', function (error, stdout, stderr) {
         t.error(error, 'gulp command should execute without errors');
-        console.log('OUT: ', stdout);
-        console.log('ERR: ', stderr);
 
         checkFile(t, './test/copied-dummy.js', 'gulp should have created a new file in test');
     });
 
     exec('gulp --target=production', function (error, stdout, stderr) {
         t.error(error, 'gulp command should execute without errors');
-        console.log('OUT: ', stdout);
-        console.log('ERR: ', stderr);
 
         checkFile(t, './dist/copied-dummy.js', 'gulp should have created a new file in dist');
     });

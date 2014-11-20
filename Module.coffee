@@ -1,10 +1,12 @@
 BuiltinModule = require 'module'
 assert = (require 'assert').ok
+vm = require 'vm'
 
 NativeModule = do (natives = Object.keys process.binding 'natives') ->
   exists: (name) -> name in natives
 
 wrapper = require './wrapper'
+Sandbox = require './Sandbox'
 
 class Module extends BuiltinModule
   require: (path) ->
@@ -12,7 +14,6 @@ class Module extends BuiltinModule
     assert path, 'missing path'
     
     if path is 'gulp'
-      console.log 'requires gulp, gets our wrapper'
       return wrapper
     
     filename = BuiltinModule._resolveFilename path, @parent
@@ -33,13 +34,21 @@ class Module extends BuiltinModule
       if hadException
         delete BuiltinModule._cache[filename]
     
-    console.log 'require(', path, ')'
     return module.exports
     
-    #BuiltinModule._load.call @, path, @parent
-    
   load: (filename) ->
-    console.log 'load(', filename, ')'
     BuiltinModule.prototype.load.call @, filename
+    
+  _compile: (content, filename) ->
+    self = @
+    content = content.replace /^\#\!.*/, ''
+    
+    sandbox = new Sandbox({
+      filename
+      module: self
+      imports: {gulp: wrapper}
+      })
+    
+    return vm.runInNewContext content, sandbox, {filename}
     
 module.exports = Module

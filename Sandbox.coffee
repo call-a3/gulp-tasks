@@ -2,6 +2,8 @@ path = require 'path'
 
 module.exports = class Sandbox
   constructor: ({filename, module, imports}) ->
+    self = @
+    
     # Include global as reference to self
     Object.defineProperty @, 'global',
       get: () -> @
@@ -15,20 +17,20 @@ module.exports = class Sandbox
     Object.defineProperty @, 'module',
       value: module
 
-    console.log('binding sandbox require: ', module.require)
     # Add aliases to module fields
     Object.defineProperty @, 'exports',
       get: () -> module.exports
     Object.defineProperty @, 'require',
-      get: () -> module.require
+      value: (id) ->
+        module.require.call module, id
         
     # Add imported globals if they don't override fixed globals
-    for name, prop in imports
+    for name, prop of imports
       if not @hasOwnProperty name
         Object.defineProperty @, name, value: prop
     
     # Add true globals if they don't override imports
-    for name, prop in global
-      console.log 'pulling in global.' + name + ' to sandbox'
-      if not @hasOwnProperty name
+    for own name, prop of global
+      blacklisted = name in ['Sandbox', 'Module', 'global']
+      if not (@hasOwnProperty name) and not blacklisted
         Object.defineProperty @, name, value: prop

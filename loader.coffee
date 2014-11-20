@@ -3,7 +3,6 @@ path = require 'path'
 gulp = require './wrapper'
 Module = require './Module'
 gulpfile = require './gulpfile'
-console.log 'using gulpfile: ', gulpfile
 
 getStack = (error) ->
   s = null
@@ -48,6 +47,7 @@ module.exports = ({folder, gulp}) ->
               gulp.task name, task.dependencies ? [], task
             catch ex
               stack = getStack ex
+              ###
               gulp.util.log [
                 gulp.util.colors.red(ex.name + ': ' + ex.message)
                 ' in task \''
@@ -60,11 +60,13 @@ module.exports = ({folder, gulp}) ->
                   stack[0].getColumnNumber()
                 ].join '' else ''
               ].join ''
+              ###
               console.log ex.stack
       catch ex
         logException ex
+        msg = 'Couldn\'t read directory \'' + folder + '\''
+        throw new gulp.util.PluginError 'gulp-tasks', msg
   catch ex
     logException ex
-    msg = 'Couldn\'t read directory \'' + folder + '\''
-    throw new gulp.util.PluginError 'gulp-tasks', msg
+    throw new gulp.util.PluginError 'gulp-tasks', (ex.name + ': ' + ex.message)
   return gulp
