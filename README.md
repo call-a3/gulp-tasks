@@ -1,7 +1,7 @@
 gulp-tasks
 ==========
 
-[![Build Status](https://travis-ci.org/call-a3/gulp-tasks.svg?branch=master)](https://travis-ci.org/call-a3/gulp-tasks)
+[![Build Status](https://travis-ci.org/call-a3/gulp-tasks.svg?branch=develop)](https://travis-ci.org/call-a3/gulp-tasks)
 [![Dependency Status](https://david-dm.org/call-a3/gulp-tasks.svg)](https://david-dm.org/call-a3/gulp-tasks) [![devDependency Status](https://david-dm.org/call-a3/gulp-tasks/dev-status.svg)](https://david-dm.org/call-a3/gulp-tasks#info=devDependencies)
 
 Gulp plugin that allows the use of browserify transforms in a gulp pipeline.
