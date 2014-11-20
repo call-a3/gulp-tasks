@@ -2,7 +2,7 @@
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 plumber = require 'gulp-plumber'
-clean = require 'gulp-clean'
+del = require 'del'
 path = require 'path'
 extend = require 'extend'
 minimist = require 'minimist'
@@ -45,8 +45,9 @@ Object.defineProperty wrapper, 'dirs',
 Object.defineProperty wrapper, 'main',
   value: path.resolve (options.main ? (wrapper.dirs.source + '/' + 'main.js'))
 
-gulp.task 'clean', () ->
-  gulp.src wrapper.dirs.build
-  .pipe clean()
+gulp.task 'clean', (cb) ->
+  del [
+    wrapper.dirs.build + '/**'
+  ], cb
       
 module.exports = wrapper
