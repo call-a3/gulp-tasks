@@ -8,6 +8,6 @@ while path.basename(gulpfile?.filename).toLowerCase() isnt 'gulpfile.js'
   if gulpfile.parent?
     gulpfile = gulpfile.parent
   else
-    return
+    break
 
 module.exports = gulpfile
