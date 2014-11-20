@@ -13,22 +13,32 @@ Gulp plugin that allows the use of browserify transforms in a gulp pipeline.
 ## Usage
 Just write this in your gulpfile.js
 ```javascript
-// instead of require('gulp') and then defining tasks on it, just do
+/* 
+  instead of require('gulp') and then defining tasks on it
+  just write the following 
+*/
 require('gulp-tasks')();
 ```
 
 Now create a folder next to your gulpfile.js called `gulp` and have them contain tasks like this:
 ```javascript
+/*
+  no need to require('gulp')
+  because gulp is already defined in the scope of the module
+*/
 module.exports = function () {
 	gulp.src('...')
 	// your gulp task here
 		.pipe(gulp.dest('...'));
-		
-module.exports.dependencies = ['dep1', 'dep2']; // this is optional
 }
+    
+// the following line is optional
+module.exports.dependencies = ['dep1', 'dep2'];
 ```
 (Note: this setup is compatible with [gulp-task-loader](https://www.npmjs.org/package/gulp-task-loader).)
 You can also write tasks in coffeescript.
+
+**WARNING**: tasks are included inside the scope of the gulpfile. Therefore, when require-ing from relative paths within tasks, assume the current directory is the one in which the gulpfile is found.
 
 ## Extra features
 Gulp-tasks wraps the gulp library in a backwards-compatible way and exposes it to the tasks. 

@@ -9,10 +9,10 @@ var stream = require('stream');
 
 test('gulp compliance test', function (t) {
     t.plan(7);
-    
+
     t.equal(typeof modul, "function", 'gulp-tasks should be a function');
     var gulp = modul();
-    
+
     t.equal(typeof gulp.task, "function", 'gulp.task should be a function');
     t.equal(typeof gulp.src, "function", 'gulp.src should be a function');
     t.equal(typeof gulp.src('./**').on, 'function', 'gulp.src(\'./**\') should return a readable stream');
@@ -24,7 +24,7 @@ test('gulp compliance test', function (t) {
 test('gulp extension test', function (t) {
     t.plan(4);
     var gulp = modul();
-  
+
     t.equal(typeof gulp.src().on, 'function', 'gulp.src() should return a readable stream');
     t.equal(typeof gulp.dest().on, 'function', 'gulp.dest() should return a writable stream');
     var name = gulp.name;
@@ -33,12 +33,30 @@ test('gulp extension test', function (t) {
     t.equal(name, gulp.name, 'gulp.name should not be modifiable');
 });
 
-test('functionality test', function(t) {
-    t.plan(2);
-  
-    exec('gulp', function(error, stdout, stderr) {
-      t.error(error, 'gulp command should execute without errors');
-      
-      t.ok(fs.fileExists('build/dummy.js'), 'task should be executed');
+function checkFile(t, file, msg) {
+    try {
+        t.ok(fs.statSync(file).isFile(), msg);
+    } catch (ex) {
+        t.fail(msg);
+    }
+}
+
+test('functionality test', function (t) {
+    t.plan(4);
+
+    exec('gulp', function (error, stdout, stderr) {
+        t.error(error, 'gulp command should execute without errors');
+        console.log('OUT: ', stdout);
+        console.log('ERR: ', stderr);
+
+        checkFile(t, './test/copied-dummy.js', 'gulp should have created a new file in test');
+    });
+
+    exec('gulp --target=production', function (error, stdout, stderr) {
+        t.error(error, 'gulp command should execute without errors');
+        console.log('OUT: ', stdout);
+        console.log('ERR: ', stderr);
+
+        checkFile(t, './dist/copied-dummy.js', 'gulp should have created a new file in dist');
     });
 });

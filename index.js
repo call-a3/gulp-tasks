@@ -1,21 +1,15 @@
 /*jslint node: true*/
-require('coffee-script/register');
+require('coffee-script-redux/register');
 var extend = require('extend');
 
 var load = require('./loader');
-var wrap = require('./wrapper');
+var wrapper = require('./wrapper');
 
 var defaults = {
-  folder: './gulp'
+  folder: './gulp',
+  gulp: wrapper
 };
 
-module.exports = function (gulp, options) {
-    options = extend({}, defaults, options);
-    var wrapper = wrap(gulp);
-    try {
-      load(wrapper, options);
-    } catch (e) {
-      wrapper.emit('error', e);
-    }
-    return wrapper;
+module.exports = function (options) {
+    return load(extend({}, defaults, options));
 };
