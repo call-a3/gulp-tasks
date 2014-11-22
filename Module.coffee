@@ -16,15 +16,18 @@ class Module extends BuiltinModule
     if path is 'gulp'
       return wrapper
     
-    filename = BuiltinModule._resolveFilename path, @parent
+    if path is 'gulp-util'
+      return wrapper.util
+    
+    filename = BuiltinModule._resolveFilename path, @
     if NativeModule.exists filename
-      return BuiltinModule._load.call @, path, @parent
+      return BuiltinModule._load.call @, path, @
     
     cached = BuiltinModule._cache[filename]
     if cached
       return cached.exports
       
-    BuiltinModule._cache[filename] = module = new Module(filename, @parent)
+    BuiltinModule._cache[filename] = module = new Module(filename, @)
     
     hadException = yes
     try

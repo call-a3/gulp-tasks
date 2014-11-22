@@ -29,7 +29,7 @@ logException = (ex) ->
 
 module.exports = ({folder, gulp}) ->
   folder = path.resolve folder
-  gulp.util.log 'Trying to load tasks from \''+folder+'\''
+  gulp.util.log 'Loading tasks from '+ (gulp.util.colors.magenta folder)
   try
     files = fs.readdirSync folder
     files.forEach (relative) ->
