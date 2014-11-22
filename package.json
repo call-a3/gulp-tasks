@@ -30,7 +30,7 @@
     "minimist": "^1.1.0"
   },
   "devDependencies": {
-    "tap-spec": "^1.0.1",
+    "tap-spec": "^2.1.0",
     "tape": "^3.0.3"
   }
 }
