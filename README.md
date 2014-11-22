@@ -38,8 +38,6 @@ module.exports.dependencies = ['dep1', 'dep2'];
 (Note: this setup is compatible with [gulp-task-loader](https://www.npmjs.org/package/gulp-task-loader).)
 You can also write tasks in coffeescript.
 
-**WARNING**: tasks are included inside the scope of the gulpfile. Therefore, when require-ing from relative paths within tasks, assume the current directory is the one in which the gulpfile is found.
-
 ## Extra features
 gulp-loader wraps the gulp library in a backwards-compatible way and exposes it to the tasks. 
 This means you can define your tasks as if gulp was pre-loaded, but you can also use some shortcuts or extra features.
