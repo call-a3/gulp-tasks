@@ -49,5 +49,31 @@ var gutil = require('gulp-util');
 gutil.log(); // or whatever gulp-util function you would use
 ```
 
+### gulp.debug
+Contains a boolean indicating if the build should assume a develop/debug environment. The default is to assume debugging is needed unless `--target=production` was provided on the command line. You can use this to adjust build behaviour based on whether debugging is required.
+
+```bash
+# Usage on the terminal looks like the following
+gulp --target=production $task
+```
+
+### gulp.name
+Contains a string that represents the name of the package. This consists of package.name + '-' + package.version + '.js', wherein package is loaded from package.json.
+
+### gulp.dirs
+A hash containing source, test, build and dist values. These are set from values in the "gulp" entry in package.json using the same names and default to 'src', 'test', 'build' and 'dist' respectively (if one of the options isn't set).
+
+### gulp.main
+Returns the full pathname of package.main or `gulp.dirs.source + '/main.js'` if none is set in package.json.
+
+### gulp.src()
+You can use the gulp.src() function without globPattern parameters. This defaults to streaming every file in the 'src' folder. (This should be a sibling of the 'gulp' folder.) You can You can also still use the function as you would the normal gulp.src(globPattern) function.
+
+### gulp.dest()
+You can use the gulp.dest() function without path parameter. This defaults to streaming every file to the 'test' or 'dist' folder, depending on the value of `gulp.debug`. (These should be siblings of the 'gulp' folder.) You can also still use the function as you would the normal gulp.dest(path) function.
+
+### gulp.task('clean')
+By default, the task 'clean' is defined. This clears every file from the `gulp.dirs.build` folder.
+
 ## License
 [MIT](http://github.com/call-a3/gulp-loader/blob/master/LICENSE)
