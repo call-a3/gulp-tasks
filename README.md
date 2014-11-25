@@ -1,6 +1,8 @@
 gulp-loader
 ===========
 
+_**DISCLAIMER: ** This plugin is still in an alpha stage. I currently use it in other projects I'm working on, so I will be discovering bugs and fixing them as my other projects advance. Please add issues if you find any bugs and I will try to resolve them as fast as I can._
+
 [![Build Status](https://travis-ci.org/call-a3/gulp-loader.svg?branch=develop)](https://travis-ci.org/call-a3/gulp-loader)
 [![Dependency Status](https://david-dm.org/call-a3/gulp-loader.svg)](https://david-dm.org/call-a3/gulp-loader) [![devDependency Status](https://david-dm.org/call-a3/gulp-loader/dev-status.svg)](https://david-dm.org/call-a3/gulp-loader#info=devDependencies)
 
@@ -58,22 +60,34 @@ gulp --target=production $task
 ```
 
 ### gulp.name
-Contains a string that represents the name of the package. This consists of package.name + '-' + package.version + '.js', wherein package is loaded from package.json.
+Contains a string that represents the name of the package. This consists of package.name + '@' + package.version + '.js', wherein package is loaded from package.json. The character '@' can be replaced by another by setting the option `gulp.name.infix`. Similarly, the extension can be set differently by setting the option `gulp.name.extension`.
 
 ### gulp.dirs
-A hash containing source, test, build and dist values. These are set from values in the "gulp" entry in package.json using the same names and default to 'src', 'test', 'build' and 'dist' respectively (if one of the options isn't set).
+A hash containing `source`, `test`, `build` and `dist` values. These are set from values in the "gulp" entry in package.json using the same names and default to 'src', 'test', 'build' and 'dist' respectively. Each of these folders is resolved relative to the parent of gulpfile.js.
 
 ### gulp.main
 Returns the full pathname of package.main or `gulp.dirs.source + '/main.js'` if none is set in package.json.
 
 ### gulp.src()
-You can use the gulp.src() function without globPattern parameters. This defaults to streaming every file in the 'src' folder. (This should be a sibling of the 'gulp' folder.) You can You can also still use the function as you would the normal gulp.src(globPattern) function.
+You can use the gulp.src() function without globPattern parameters. This defaults to streaming every file in the `gulp.dirs.source` folder. You can also still use the function as you would the normal gulp.src(globPattern) function.
 
 ### gulp.dest()
-You can use the gulp.dest() function without path parameter. This defaults to streaming every file to the 'test' or 'dist' folder, depending on the value of `gulp.debug`. (These should be siblings of the 'gulp' folder.) You can also still use the function as you would the normal gulp.dest(path) function.
+You can use the gulp.dest() function without path parameter. This defaults to streaming every file to the `gulp.dirs.build` folder. You can also still use the function as you would the normal gulp.dest(path) function.
+
+### gulp.deploy()
+The gulp.deploy() function works similarly to gulp.dest(). This streams every file to the `gulp.dirs.test` or `gulp.dirs.dist` folder, depending on the value of `gulp.debug`.
 
 ### gulp.task('clean')
-By default, the task 'clean' is defined. This clears every file from the `gulp.dirs.build` folder.
+By default, the task 'clean' is defined. This clears every file from the `gulp.dirs.build` folder. This tasks also comes in the variants `clean:test` and `clean:dist` to clear the directories `gulp.dirs.test` or `gulp.dirs.dist` respectively.
+
+### gulp.task('deploy')
+By default, the task 'deploy' is defined. This moves every file from the `gulp.dirs.build` folder into either `gulp.dirs.test` or `gulp.dirs.dist`, depending on the value of `gulp.debug`.
+
+### _Other features_
+
+_As this tool is currently in a alpha stage, I am also very open to feature requests at this stage. If you want to request a feature, I would prefer it if you did so by creating a test for it and created a pull request for it. If you do this, use 'FR ' + description of your feature as the title of the pull request._
+
+_If you REALLY want a certain feature to get incorporated quickly, you can ofcourse implement it yourself ;) However, I will NOT accept features that aren't accompagnied by their own tests._
 
 ## License
 [MIT](http://github.com/call-a3/gulp-loader/blob/master/LICENSE)

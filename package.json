@@ -4,7 +4,8 @@
   "description": "Gulp plugin that wraps gulp and loads tasks as seperate files from a gulp folder",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter spec gulp-test && cd ./test && npm install && cd .. && node ./test/spec.js | tap-spec"
+    "install": "cd ./test && npm install && cd ..",
+    "test": "node ./test/spec.js | tap-spec"
   },
   "repository": {
     "type": "git",
