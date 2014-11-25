@@ -1,5 +1,5 @@
 /*jslint node: true*/
-require('coffee-script-redux/register');
+require('coffee-script/register');
 var extend = require('extend');
 
 var load = require('./loader');

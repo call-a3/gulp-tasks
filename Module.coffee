@@ -52,6 +52,6 @@ class Module extends BuiltinModule
       imports: {gulp: wrapper}
       })
     
-    return vm.runInNewContext content, sandbox, {filename}
+    vm.runInNewContext content, sandbox, filename
     
 module.exports = Module

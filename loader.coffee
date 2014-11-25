@@ -4,29 +4,6 @@ gulp = require './wrapper'
 Module = require './Module'
 gulpfile = require './gulpfile'
 
-getStack = (error) ->
-  s = null
-  b = Error.prepareStackTrace
-  Error.prepareStackTrace = (error, stack) ->
-    s = stack
-    b error, stack
-  stack = error.stack
-  Error.prepareStackTrace = b
-  return s
-
-logException = (ex) ->
-  stack = getStack ex
-  gulp.util.log [
-    gulp.util.colors.red(ex.name + ': ' + ex.message)
-    if stack[0].getFileName?()?[0] is '/' then [
-      ' at '
-      stack[0].getFileName() + ':'
-      stack[0].getLineNumber() + ':'
-      stack[0].getColumnNumber()
-    ].join '' else ''
-  ].join ''
-  console.log ex.stack
-
 module.exports = ({folder, gulp}) ->
   folder = path.resolve folder
   gulp.util.log 'Loading tasks from '+ (gulp.util.colors.magenta folder)
@@ -46,27 +23,19 @@ module.exports = ({folder, gulp}) ->
               task = taskModule.exports
               gulp.task name, task.dependencies ? [], task
             catch ex
-              stack = getStack ex
-              ###
-              gulp.util.log [
-                gulp.util.colors.red(ex.name + ': ' + ex.message)
-                ' in task \''
-                gulp.util.colors.cyan name
-                '\''
-                if stack[0].getFileName?()?[0] is '/' then [
-                  ' at '
-                  stack[0].getFileName() + ':'
-                  stack[0].getLineNumber() + ':'
-                  stack[0].getColumnNumber()
-                ].join '' else ''
-              ].join ''
-              ###
-              console.log ex.stack
+              gulp.task name, [], () ->
+                position = ex.stack.split('\n')[1].trim()
+                
+                gulp.util.log [
+                  gulp.util.colors.red(ex.name + ': ' + ex.message)
+                  ' in task \''
+                  gulp.util.colors.cyan name
+                  '\' '
+                  position
+                ].join ''
+                throw ex
       catch ex
-        logException ex
-        msg = 'Couldn\'t read directory \'' + folder + '\''
-        throw new gulp.util.PluginError 'gulp-tasks', msg
+        throw new gulp.util.PluginError 'gulp-tasks', ex
   catch ex
-    logException ex
-    throw new gulp.util.PluginError 'gulp-tasks', (ex.name + ': ' + ex.message)
+    throw new gulp.util.PluginError 'gulp-tasks', ex
   return gulp

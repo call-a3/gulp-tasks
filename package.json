@@ -1,10 +1,11 @@
 {
   "name": "gulp-loader",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Gulp plugin that wraps gulp and loads tasks as seperate files from a gulp folder",
   "main": "index.js",
   "scripts": {
-    "test": "cd ./test && npm install && cd .. && node ./test/spec.js | tap-spec"
+    "install": "cd ./test && npm install && cd ..",
+    "test": "node ./test/spec.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,7 @@
   },
   "homepage": "https://github.com/call-a3/gulp-tasks",
   "dependencies": {
-    "coffee-script-redux": "^2.0.0-beta8",
+    "coffee-script": "^1.8.0",
     "del": "^0.1.3",
     "extend": "^2.0.0",
     "gulp": "^3.8.10",
@@ -30,7 +31,13 @@
     "minimist": "^1.1.0"
   },
   "devDependencies": {
-    "tap-spec": "^1.0.1",
+    "graceful-fs": "^3.0.4",
+    "mkdirp": "^0.5.0",
+    "mocha": "^2.0.1",
+    "q": "^1.1.2",
+    "rimraf": "^2.2.8",
+    "should": "^4.3.0",
+    "tap-spec": "^2.1.0",
     "tape": "^3.0.3"
   }
 }
