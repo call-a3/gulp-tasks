@@ -100,7 +100,7 @@ test('gulp.debug', function (t) {
 });
 
 test('gulp.dirs', function (t) {
-  t.plan(9);
+  t.plan(13);
   if (typeof gulp === 'undefined') {
     gulp = modul();
   }
@@ -109,15 +109,19 @@ test('gulp.dirs', function (t) {
   
   checkImmutable(t, gulp.dirs, 'source', 'gulp.dirs');
   t.equal(typeof gulp.dirs.source, 'string', 'gulp.dirs.source should be a string value');
+  t.equal(gulp.dirs.source, 'src', 'gulp.dirs.source should default to src if the corresponding setting is not set in package.json');
   
   checkImmutable(t, gulp.dirs, 'build', 'gulp.dirs');
   t.equal(typeof gulp.dirs.build, 'string', 'gulp.dirs.build should be a string value');
+  t.equal(gulp.dirs.build, 'build', 'gulp.dirs.source should default to build if the corresponding setting is not set in package.json');
   
   checkImmutable(t, gulp.dirs, 'test', 'gulp.dirs');
   t.equal(typeof gulp.dirs.test, 'string', 'gulp.dirs.test should be a string value');
+  t.equal(gulp.dirs.test, 'test', 'gulp.dirs.test should default to src if the corresponding setting is not set in package.json');
   
   checkImmutable(t, gulp.dirs, 'dist', 'gulp.dirs');
   t.equal(typeof gulp.dirs.dist, 'string', 'gulp.dirs.dist should be a string value');
+  t.equal(gulp.dirs.dist, 'dist', 'gulp.dirs.dist should default to dist if the corresponding setting is not set in package.json');
   
 });
 
