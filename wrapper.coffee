@@ -1,12 +1,12 @@
 # Import gulp libraries
-gulp = require 'gulp'
-gutil = require 'gulp-util'
-plumber = require 'gulp-plumber'
-del = require 'del'
-path = require 'path'
-extend = require 'extend'
+gulp     = require 'gulp'
+gutil    = require 'gulp-util'
+plumber  = require 'gulp-plumber'
+del      = require 'del'
+path     = require 'path'
+extend   = require 'extend'
 minimist = require 'minimist'
-bundle = require './package.json'
+bundle   = require './bundle'
 
 options = extend {}, {
   name:
@@ -60,7 +60,7 @@ Object.defineProperty wrapper, 'dirs',
       enumerable: true
 
 Object.defineProperty wrapper, 'main',
-  value: path.resolve (bundle.main ? (wrapper.dirs.source + '/' + 'main.js'))
+  value: (bundle.main ? (wrapper.dirs.source + '/' + 'main.js'))
 
 Object.defineProperty wrapper, 'deploy',
   value: () ->
