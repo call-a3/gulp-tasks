@@ -6,7 +6,8 @@ del = require 'del'
 path = require 'path'
 extend = require 'extend'
 minimist = require 'minimist'
-bundle = require path.resolve './package.json'
+bundle = require './package.json'
+
 options = extend {}, {
   name:
     infix: '-'
@@ -15,7 +16,7 @@ options = extend {}, {
   test: 'test'
   build: 'build'
   dist: 'dist'
-}, bundle.gulp?
+}, bundle?.gulp?
 
   
 wrapper = extend {}, gulp, {
