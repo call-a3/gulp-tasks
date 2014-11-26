@@ -12,11 +12,12 @@ options = extend {}, {
   name:
     infix: '-'
     extension: '.js'
-  source: 'src'
-  test: 'test'
-  build: 'build'
-  dist: 'dist'
-}, bundle?.gulp?
+  dirs:
+    source: 'src'
+    test: 'test'
+    build: 'build'
+    dist: 'dist'
+}, bundle?.gulp
 
   
 wrapper = extend {}, gulp, {
@@ -47,16 +48,16 @@ Object.defineProperty wrapper, 'debug',
 Object.defineProperty wrapper, 'dirs',
   value: Object.create Object.prototype,
     source:
-      value: options.source
+      value: options.dirs.source
       enumerable: true
     test:
-      value: options.test
+      value: options.dirs.test
       enumerable: true
     build:
-      value: options.build
+      value: options.dirs.build
       enumerable: true
     dist:
-      value: options.dist
+      value: options.dirs.dist
       enumerable: true
 
 Object.defineProperty wrapper, 'main',
