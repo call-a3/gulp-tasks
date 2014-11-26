@@ -65,24 +65,26 @@ test('gulp.dest()', function (t) {
 });
 
 test('gulp.name', function (t) {
-  t.plan(2);
+  t.plan(3);
   if (typeof gulp === 'undefined') {
     gulp = modul();
   }
   
   checkImmutable(t, gulp, 'name', 'gulp');
   t.equal(typeof gulp.name, 'string', 'gulp.name should be a string value');
+  t.equal(gulp.name, 'gulp-tasks-test-0.0.0.js', 'gulp.name should be in accorance with package.json file');
   
 });
 
 test('gulp.main', function (t) {
-  t.plan(2);
+  t.plan(3);
   if (typeof gulp === 'undefined') {
     gulp = modul();
   }
   
   checkImmutable(t, gulp, 'main', 'gulp');
   t.equal(typeof gulp.main, 'string', 'gulp.main should be a string value');
+  t.equal(gulp.main, 'src/main.js', 'gulp.main should default to src/main.js if "main" is not set in package.json');
   
 });
 
