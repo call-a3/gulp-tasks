@@ -45,10 +45,18 @@ Object.defineProperty wrapper, 'debug',
 
 Object.defineProperty wrapper, 'dirs',
   value: Object.create Object.prototype,
-    source: value: options.source
-    test:   value: options.test
-    build:  value: options.build
-    dist:   value: options.dist
+    source:
+      value: options.source
+      enumerable: true
+    test:
+      value: options.test
+      enumerable: true
+    build:
+      value: options.build
+      enumerable: true
+    dist:
+      value: options.dist
+      enumerable: true
 
 Object.defineProperty wrapper, 'main',
   value: path.resolve (bundle.main ? (wrapper.dirs.source + '/' + 'main.js'))
