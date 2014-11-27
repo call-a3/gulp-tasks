@@ -12,16 +12,21 @@ var defaults = {
 };
 
 module.exports = function (options) {
-    exec('npm view gulp-loader version', {timeout: 500}, function(err, std_out, std_err) {
+    exec('npm view gulp-loader version', {timeout: 500}, function(err, stdout, stderr) {
       if (err) return;
+      var current = require(__dirname+'/package.json').version;
+      var latest = stdout.toString();
       var semver = require('semver');
-      var package = require(__dirname+'/package.json');
-      if (semver.gt(std_out, package.version)) {
-          wrapper.util.log(wrapper.util.colors.yellow('[gulp-loader] An updated version is available. Download it now from https://www.npmjs.org/package/gulp-loader !'));
-      } else if (semver.lt(std_out, package.version)) {
-        wrapper.util.log(wrapper.util.colors.yellow('[gulp-loader] You are using a pre-release version of gulp-loader. Do you know what you\'re doing?'));
+      if (semver.valid(latest)) {
+        if (semver.gt(latest, current)) {
+            wrapper.util.log(wrapper.util.colors.yellow('[gulp-loader] An updated version is available. Download it now from https://www.npmjs.org/package/gulp-loader !'));
+        } else if (semver.lt(latest, current)) {
+          wrapper.util.log(wrapper.util.colors.yellow('[gulp-loader] You are using a pre-release version of gulp-loader. Do you know what you\'re doing?'));
+        } else {
+          wrapper.util.log('[gulp-loader] Up to date');
+        }
       } else {
-        wrapper.util.log('[gulp-loader] Up to date');
+        wrapper.util.log(wrapper.util.colors.yellow('[gulp-loader] Could\'t get a proper version number. Maybe you should check it yourself?'));
       }
     });
     return load(extend({}, defaults, options));
