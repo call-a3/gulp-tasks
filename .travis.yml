@@ -1,11 +1,13 @@
 language: node_js
 node_js:
-- 0.1
+- '0.10'
+- '0.11'
 deploy:
   provider: npm
   email: adriaan.callaerts@gmail.com
   api_key:
-    secure: vXWaLlu20bmjRRDitksWFmtxHmpI2JeqCjLZPnjkE1oR7jiUwMzq9o97MrjUpMnD6/qZD+frtyNFMVsXivQ79y03y2EqAQH5X9y+wagOCB9SAkHWo5Be9XiZc3ksBGqBD7uODSTCpMk4WPlVVsUjGOmJxf52NURMHB8TOugLRVs=
+    secure: c2WJgOHckWhVCOxqhaRZ2Rtu3Z8ykoSRif1B1PiJ8HcpC0TmHTAwGjZiolMzt3zj4Cv2Qyp91w1EIKEo4e69EPsGX22RDWME6bh2nnXzDUIZ6XUi6ylb4iy4fao2Vlg83+SbmiIPg5PZJfnTcpqFw0BvK989vk920zFyk6ZTHWs=
   on:
     tags: true
     repo: call-a3/gulp-loader
+    all_branches: true
