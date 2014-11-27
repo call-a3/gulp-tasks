@@ -12,13 +12,13 @@ var defaults = {
 };
 
 module.exports = function (options) {
-    exec('npm view gulp-loader version', {timeout: 500}, function(err, stdout, stderr) {
+    exec('npm view gulp-loader version', {timeout: 500}, function(err, std_out, std_err) {
       if (err) return;
       var semver = require('semver');
-      var package = require('./package.json');
-      if (semver.gt(stdout, package.version)) {
+      var package = require(__dirname+'/package.json');
+      if (semver.gt(std_out, package.version)) {
           wrapper.util.log(wrapper.util.colors.yellow('[gulp-loader] An updated version is available. Download it now from https://www.npmjs.org/package/gulp-loader !'));
-      } else if (semver.lt(stdout, package.version)) {
+      } else if (semver.lt(std_out, package.version)) {
         wrapper.util.log(wrapper.util.colors.yellow('[gulp-loader] You are using a pre-release version of gulp-loader. Do you know what you\'re doing?'));
       } else {
         wrapper.util.log('[gulp-loader] Up to date');
