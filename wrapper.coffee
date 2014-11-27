@@ -1,21 +1,23 @@
 # Import gulp libraries
-gulp = require 'gulp'
-gutil = require 'gulp-util'
-plumber = require 'gulp-plumber'
-del = require 'del'
-path = require 'path'
-extend = require 'extend'
+gulp     = require 'gulp'
+gutil    = require 'gulp-util'
+plumber  = require 'gulp-plumber'
+del      = require 'del'
+path     = require 'path'
+extend   = require 'extend'
 minimist = require 'minimist'
-bundle = require path.resolve './package.json'
+bundle   = require './bundle'
+
 options = extend {}, {
   name:
     infix: '-'
     extension: '.js'
-  source: 'src'
-  test: 'test'
-  build: 'build'
-  dist: 'dist'
-}, bundle.gulp?
+  dirs:
+    source: 'src'
+    test: 'test'
+    build: 'build'
+    dist: 'dist'
+}, bundle?.gulp
 
   
 wrapper = extend {}, gulp, {
@@ -45,13 +47,21 @@ Object.defineProperty wrapper, 'debug',
 
 Object.defineProperty wrapper, 'dirs',
   value: Object.create Object.prototype,
-    source: value: options.source
-    test:   value: options.test
-    build:  value: options.build
-    dist:   value: options.dist
+    source:
+      value: options.dirs.source
+      enumerable: true
+    test:
+      value: options.dirs.test
+      enumerable: true
+    build:
+      value: options.dirs.build
+      enumerable: true
+    dist:
+      value: options.dirs.dist
+      enumerable: true
 
 Object.defineProperty wrapper, 'main',
-  value: path.resolve (bundle.main ? (wrapper.dirs.source + '/' + 'main.js'))
+  value: (bundle.main ? (wrapper.dirs.source + '/' + 'main.js'))
 
 Object.defineProperty wrapper, 'deploy',
   value: () ->
