@@ -1,7 +1,7 @@
 gulp-loader
 ===========
 
-[![Build Status](https://travis-ci.org/call-a3/gulp-loader.svg?tag=1.0.2)](https://travis-ci.org/call-a3/gulp-loader)
+[![Build Status](https://travis-ci.org/call-a3/gulp-loader.svg?tag=1.0.4)](https://travis-ci.org/call-a3/gulp-loader)
 [![Dependency Status](https://david-dm.org/call-a3/gulp-loader.svg)](https://david-dm.org/call-a3/gulp-loader) [![devDependency Status](https://david-dm.org/call-a3/gulp-loader/dev-status.svg)](https://david-dm.org/call-a3/gulp-loader#info=devDependencies)
 
 Gulp plugin that wraps gulp and loads tasks from a specified folder. Task definitions are compatible with [gulp-task-loader](https://www.npmjs.org/package/gulp-task-loader).

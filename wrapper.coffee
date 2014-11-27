@@ -8,7 +8,7 @@ extend   = require 'extend'
 minimist = require 'minimist'
 bundle   = require './bundle'
 
-options = extend {}, {
+options = extend true, {
   name:
     infix: '-'
     extension: '.js'
@@ -34,7 +34,7 @@ wrapper = extend {}, gulp, {
       .pipe(plumber())
   dest: (params...) ->
     if params.length is 0 or typeof params[0] isnt 'string'
-      params.unshift @dirs.build
+      params.unshift @dirs.build + '/'
     gulp.dest.call @, params...
   env: minimist process.argv.slice 2
 }
