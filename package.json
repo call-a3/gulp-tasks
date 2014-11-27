@@ -1,6 +1,6 @@
 {
   "name": "gulp-loader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Gulp plugin that wraps gulp and loads tasks as seperate files from a gulp folder",
   "main": "index.js",
   "scripts": {
