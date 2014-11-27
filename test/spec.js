@@ -291,9 +291,7 @@ test('coffeescript test', function (t) {
 test('configurability test', function(t) {
   t.plan(8);
   
-  process.chdir('./settings');
-  exec('gulp', function (error, stdout, stderr) {
-    process.chdir('..');
+  exec('gulp', {cwd: path.resolve('./settings')}, function (error, stdout, stderr) {
     
     t.error(error, 'gulp command should execute without errors');
     var match = stdout.match(/\n{[^\n]*\n/);
