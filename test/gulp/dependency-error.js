@@ -4,7 +4,7 @@ var faulty = require('../lib/syntax-error');
 var rename = require('../lib/rename');
 
 module.exports = function() {
-	gulp.src()
+	return gulp.src()
       .pipe(rename(faulty('shouldnt-exist.js')))
       .pipe(gulp.dest());
 };
