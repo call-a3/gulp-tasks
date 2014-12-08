@@ -50,7 +50,7 @@ class Module extends BuiltinModule
       self.require path
     
     require.resolve = (request) ->
-      BuiltinModule._resolveFilename self, request
+      BuiltinModule._resolveFilename request, self
     require.main = process.mainModule
     require.extensions = BuiltinModule._extensions
     require.cache = BuiltinModule._cache
