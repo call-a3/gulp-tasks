@@ -15,7 +15,7 @@ module.exports = function (options) {
     exec('npm view gulp-loader version', {timeout: 500}, function(err, stdout, stderr) {
       if (err) return;
       var current = require(__dirname+'/package.json').version;
-      var latest = stdout.toString();
+      var latest = stdout.toString().trim();
       var semver = require('semver');
       if (semver.valid(latest)) {
         if (semver.gt(latest, current)) {

@@ -3,7 +3,7 @@
 var rename = require('../lib/rename');
 
 module.exports = function() {
-	gulp.src()
+	return gulp.src()
       .pipe(rename({
         prefix: "copied-"
       }))
