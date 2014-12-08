@@ -1,7 +1,7 @@
 path = require 'path'
 
 module.exports = class Sandbox
-  constructor: ({filename, module, imports}) ->
+  constructor: ({filename, module, require, imports}) ->
     self = @
     
     # Include global as reference to self
@@ -23,18 +23,10 @@ module.exports = class Sandbox
       get: () -> exports
       set: (value) ->
         exports = value
+        
+    # Set require
     Object.defineProperty @, 'require',
-      value: (id) ->
-        module.require.call module, id
-    Object.defineProperty @require, 'resolve',
-      value: (request) ->
-        module.require.resolve.call request
-    Object.defineProperty @require, 'main',
-      value: module.require.main
-    Object.defineProperty @require, 'extensions',
-      value: module.require.extensions
-    Object.defineProperty @require, 'cache',
-      value: module.require.cache
+      value: require
         
     # Add imported globals if they don't override fixed globals
     for name, prop of imports

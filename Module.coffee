@@ -46,9 +46,19 @@ class Module extends BuiltinModule
     self = @
     content = content.replace /^\#\!.*/, ''
     
+    require = (path) ->
+      self.require path
+    
+    require.resolve = (request) ->
+      BuiltinModule._resolveFilename self, request
+    require.main = process.mainModule
+    require.extensions = BuiltinModule._extensions
+    require.cache = BuiltinModule._cache
+    
     sandbox = new Sandbox({
       filename
       module: self
+      require
       imports: {gulp: wrapper}
       })
     
