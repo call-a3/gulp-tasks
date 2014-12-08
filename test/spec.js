@@ -307,3 +307,27 @@ test('configurability test', function(t) {
     t.equal(dump.dirs.dist, 'production', 'gulp.dirs.dist should match the setting in package.json');
   });
 });
+
+test('module shim test', function (t) {
+  t.plan(6);
+
+  exec('gulp check-module-shim', function (error, stdout, stderr) {
+    t.error(error, 'gulp command should execute without errors');
+    var actualOutput = false;
+    stdout.split('\n').forEach(function(line) {
+      if (line.match(/\[(([0-1][0-9])|(2[0-3])):[0-5][0-9]:[0-5][0-9]\] Starting 'check-module-shim'.../)) {
+        actualOutput = true;
+      } else if (actualOutput) {
+        if (line.match(/\[(([0-1][0-9])|(2[0-3])):[0-5][0-9]:[0-5][0-9]\] Finished 'check-module-shim' after [^\n]*/)) {
+          actualOutput = false;
+        } else {
+          var m = line.match(/\[(([0-1][0-9])|(2[0-3])):[0-5][0-9]:[0-5][0-9]\] ((yes)|(no)) ([^\n]*)/);
+          if (m) {
+            t.equal(m[4], 'yes', m[7]);
+          }
+        }
+      }
+    });
+  });
+
+});
