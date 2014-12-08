@@ -18,8 +18,11 @@ module.exports = class Sandbox
       value: module
 
     # Add aliases to module fields
+    exports = module.exports
     Object.defineProperty @, 'exports',
-      get: () -> module.exports
+      get: () -> exports
+      set: (value) ->
+        exports = value
     Object.defineProperty @, 'require',
       value: (id) ->
         module.require.call module, id
