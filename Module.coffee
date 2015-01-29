@@ -59,6 +59,7 @@ class Module extends BuiltinModule
       filename
       module: self
       require
+      global: sandbox
       imports: {gulp: wrapper}
       })
     

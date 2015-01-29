@@ -309,7 +309,7 @@ test('configurability test', function(t) {
 });
 
 test('module shim test', function (t) {
-  t.plan(6);
+  t.plan(7);
 
   exec('gulp check-module-shim', function (error, stdout, stderr) {
     t.error(error, 'gulp command should execute without errors');

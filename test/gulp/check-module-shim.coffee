@@ -12,7 +12,9 @@ module.exports = (done) ->
   check (require.main == process.mainModule),
     'main should be a process.mainModule'
   check (typeof require.extensions is 'object'),
-    'module.extensions should be an object map'
+    'require.extensions should be an object map'
   check (typeof require.cache is 'object'),
-    'module.cache should be an object map'
+    'require.cache should be an object map'
+  check (this is module.exports),
+    'module should be the current context'
   done()
